@@ -7,6 +7,7 @@ import { AppContainer } from 'react-hot-loader';
 import App from './App'
 
 //样式
+import './assets/styles/markdown.css';
 import 'antd/dist/antd.min.css';
 import './assets/fonts/iconfont/iconfont.css';
 import './assets/styles/common.less';

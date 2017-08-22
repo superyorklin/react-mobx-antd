@@ -43,7 +43,7 @@ module.exports = {
         Immutable: 'immutable'
     }),
     new HtmlWebpackPlugin({
-      title: 'API Console',
+      title: 'JUST DEMO',
       filename: 'index.html',
       template: path.resolve(CONST.SRC, './assets/templates/index.html'),
       minify: {

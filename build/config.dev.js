@@ -30,7 +30,7 @@ module.exports = webpackMerge(config, {
       use: ['style-loader', {
         loader: 'css-loader',
         options: {
-          modules: true,
+          modules: false,
           localIdentName: '[local]_[hash:base64:5]'
         }
       }, 'less-loader']
@@ -66,8 +66,7 @@ module.exports = webpackMerge(config, {
     },
     proxy: {
       '/': {
-        //target: "http://10.1.53.31:7580", // r10
-        // pathRewrite: { '^\/apm\/api': '' }
+        target: "http://localhost:3000",
       }
     }
   }

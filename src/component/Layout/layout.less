@@ -1,0 +1,49 @@
+.container{
+  height: 100%;
+  .side-menu{
+    width: 300px;
+    background: rgb(64,64,64);
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    .img{
+      width: 150px;
+      height: 150px;
+      background: url('../../assets/images/icon.jpg') 100% 100% no-repeat;
+      background-size: cover;
+      border-radius: 75px;
+      margin: 0 auto;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    li{
+      height: 45px;
+      color: #CDC9C9;
+      line-height: 45px;
+      font-size: 16px;
+      text-align: center;
+      border-left: 7px solid rgb(64,64,64);
+      &:hover{
+        color: #FFFFFF;
+      }
+      &.active{
+        background: #1C86EE;
+        color: #FFFFFF;
+        border-left: 7px solid#416CEE;
+      }
+      .iconfont{
+        margin-right: 10px;
+      }
+      a{
+        display: block;
+        height: 100%;
+      }
+    }
+  }
+  .main-content{
+    margin-left: 300px;
+    overflow: auto;
+    padding: 40px;
+  }
+}

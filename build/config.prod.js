@@ -23,7 +23,7 @@ module.exports = webpackMerge(config, {
                 use: [{
                     loader: 'css-loader',
                     options: {
-                        modules: true,
+                        modules: false,
                         localIdentName: '[local]_[hash:base64:5]'
                     }
                 }, 'less-loader']
