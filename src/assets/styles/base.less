@@ -1,0 +1,90 @@
+@import "_reset";
+@import "_tool";
+
+  /*
+::-webkit-scrollbar 滚动条整体部分
+::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
+::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+*/
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #C1C1C1;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 3px solid #C1C1C1;
+    border-radius: 5px;
+    background: rgba(136,136,136,0.5);
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+    background: #EDF2F6;
+}
+
+
+/* 页面主体 */
+body {
+    // overflow-x: hidden;
+    min-width: 1200px;
+    font-size: 12px;
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+    background: #EDF2F6;
+}
+
+.react {
+    box-sizing: border-box;
+    padding-top: 55px;
+    width: 100%;
+    height: 100%;
+    color: #FFFFFF;
+}
+
+.container {
+    margin-left: 160px;
+    padding-bottom: 40px;
+    .content {
+        padding: 0 20px;
+    }
+}
+
+.unexpand {
+    .container {
+        margin-left: 50px;
+    }
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -10;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        margin-left: 50px;
+    }
+}
+
+.clearfix{
+    zoom: 1;
+}
+.clearfix:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}

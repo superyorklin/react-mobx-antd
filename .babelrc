@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "react",
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [ // 这个是配置ant design的按需加载的环境
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": "css"
+      }
+    ],
+    "transform-decorators-legacy"
+  ]
+}
