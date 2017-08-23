@@ -11,7 +11,7 @@ export default class Home extends React.Component {
       case '/about':
         this.setState({curr: 3});
         break;
-      case '/artical':
+      case '/archive':
         this.setState({curr: 1});
         break;
       case '/recommend':
@@ -37,7 +37,7 @@ export default class Home extends React.Component {
               <Link to='/'><i className='iconfont icon-home'></i>首页</Link>
             </li>
             <li onClick={this.handleClick(1)} className={curr === 1 ? 'active' : ''}>
-              <Link to='/'><i className='iconfont icon-artical'></i>随笔</Link>
+              <Link to='/archive'><i className='iconfont icon-artical'></i>归档</Link>
             </li>
             <li onClick={this.handleClick(2)} className={curr === 2 ? 'active' : ''}>
               <Link to='/'><i className='iconfont icon-recommend'></i>推荐</Link>

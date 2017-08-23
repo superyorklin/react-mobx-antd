@@ -3,8 +3,11 @@ import fetch from '../utils/fetch';
 
 class Interface{
 
-  getAllArtical(){
-    return fetch.get(API.GET_ALL_ARTICAL);
+  getAllArtical(data){
+    return fetch.get(API.GET_ALL_ARTICAL,data);
+  }
+  getArchive(){
+    return fetch.get(API.GET_ARCHIVE);
   }
 }
 
