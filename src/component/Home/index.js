@@ -70,7 +70,7 @@ const Item = observer((props) => {
   return(
     <li className='artical-item'>
       <header>
-        <span className='artical-item-title'><Link to=''>{title}</Link></span>
+        <span className='artical-item-title'><Link to={`/artical/${id}`}>{title}</Link></span>
         <span className='artical-item-time'><Icon type="calendar" />{time}</span>
       </header>
       <desc dangerouslySetInnerHTML={{__html: desc}}></desc>

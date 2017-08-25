@@ -1,7 +1,7 @@
 import React from 'react';
 import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
-import {observable,action,autorun} from 'mobx';
+import {observable,action} from 'mobx';
 import {Link} from 'react-router';
 import {Icon} from 'antd';
 import './archive.less';

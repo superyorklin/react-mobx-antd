@@ -9,6 +9,9 @@ class Interface{
   getArchive(){
     return fetch.get(API.GET_ARCHIVE);
   }
+  getComment(data){
+    return fetch.get(API.GET_COMMENT,data);
+  }
 }
 
 export default new Interface();

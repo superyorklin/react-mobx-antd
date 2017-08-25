@@ -3,31 +3,17 @@ import './layout.less';
 import { Link } from 'react-router';
 
 export default class Home extends React.Component {
-  state={
-    curr: 0
-  }
+ 
   componentWillMount(){
-    switch (this.props.location.pathname){
-      case '/about':
-        this.setState({curr: 3});
-        break;
-      case '/archive':
-        this.setState({curr: 1});
-        break;
-      case '/recommend':
-        this.setState({curr: 2});
-        break;
-      default:
-        this.setState({curr: 0})
+    if(!localStorage.getItem('curr')){
+      localStorage.setItem('curr',0);
     }
   }
   handleClick = (index) => () =>{
-    this.setState({
-      curr: index
-    })
+    localStorage.setItem('curr',index);
   }
   render(){
-    const {curr} = this.state;
+    const curr = +localStorage.getItem('curr');
     return (
       <div className='container'>
         <div className='side-menu'>
