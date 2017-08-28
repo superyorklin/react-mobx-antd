@@ -1,6 +1,6 @@
 import React from 'react';
 import './artical.less';
-import {Spin} from 'antd';
+import {Spin,message} from 'antd';
 import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
 import Comment from './Comment';
@@ -22,6 +22,10 @@ export default class Artical extends React.Component{
       },() => {
         this.changeLoading();
       })
+    }).catch(err => {
+      let msg = `${err.statusCode}错误`;
+      this.changeLoading();
+      message.error(msg);     
     })
   }
   render(){

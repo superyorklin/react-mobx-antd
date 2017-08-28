@@ -3,7 +3,7 @@ import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
 import {Link} from 'react-router';
-import {Icon} from 'antd';
+import {Icon,message} from 'antd';
 import './archive.less';
 
 @observer
@@ -17,6 +17,8 @@ export default class Archive extends React.Component{
   componentWillMount(){
     Interface.getArchive().then(res => {
       this.changeData(res);
+    }).catch(err => {
+      message.error(`${err.statusCode}错误`);
     })
   }
 

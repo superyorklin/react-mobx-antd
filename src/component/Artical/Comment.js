@@ -2,7 +2,7 @@ import React from 'react';
 import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
-import {Form,Input,Button} from 'antd';
+import {Form,Input,Button,message} from 'antd';
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 
@@ -17,10 +17,16 @@ export default class Comment extends React.Component{
   constructor(props){
     super(props);
   }
-  componentWillMount(){
+
+  _getData = () => {
     Interface.getComment({articalId: this.props.articalId}).then(res => {
       this.changeComment(res);
+    }).catch(() => {
+      message.error('获取评论失败');
     })
+  }
+  componentWillMount(){
+    this._getData();
   }
   render(){
     let list = [];
@@ -30,9 +36,9 @@ export default class Comment extends React.Component{
       this.comment.map((item,index) => {
         list.push(
           <div className='comment-list' key={index}>
-            <p style={{fontSize: 14}}>{item.name}</p>
-            <p style={{fontSize: 12,color: '#0C0'}}>{item.time}</p>
-            <p style={{fontSize: 14,marginTop: 10,fontFamily: 'Georgia, serif',wordWrap: 'break-word'}}>{item.content}</p>
+            <p style={{fontSize: 14}}><span>{ 1 + index}楼&nbsp;&nbsp;</span>{item.time}</p>
+            <p style={{fontSize: 14,color: '#0C0'}}>{item.name}&nbsp;:</p>
+            <p style={{fontSize: 14,marginTop: 5,fontFamily: 'Georgia, serif',wordWrap: 'break-word',background: 'white',padding: '5px'}}>{item.content}</p>
           </div>)
       })
     }
@@ -41,7 +47,7 @@ export default class Comment extends React.Component{
         <p style={{fontSize: 30,borderTop: '3px solid #CCCCCC'}}>评论区</p>
         {list}
         <p style={{fontSize: 30,marginTop: 10}}>发表评论</p>
-        <WrappedCommitForm />
+        <WrappedCommitForm reload={this._getData} />
       </div>
     )
   }
@@ -53,7 +59,13 @@ class CommitForm extends React.Component{
     e.preventDefault();
     this.props.form.validateFields((err,value) => {
       if(!err){
-        console.log(value);
+        Interface.postComment(value).then(res => {
+          if(res.status === 'ok'){
+            this.props.reload();
+          }
+        }).catch(() => {
+          message.error('提交评论失败');
+        })
       }
     })
   }

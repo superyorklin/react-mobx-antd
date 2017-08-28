@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pagination,Icon,Spin} from 'antd';
+import {Pagination,Icon,Spin,message} from 'antd';
 import './home.less';
 import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
@@ -31,6 +31,10 @@ export default class Home extends React.Component {
       this.changeLoading();
       this.changeArtical(res.data);
       this.changeTotal(res.total);   
+    }).catch(err => {
+      let msg = `${err.statusCode}错误`;
+      this.changeLoading();
+      message.error(msg);
     });
   }
   pageChange = (page) => {
