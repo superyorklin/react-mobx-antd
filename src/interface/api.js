@@ -3,6 +3,7 @@ const API = {
   GET_ARCHIVE: '/archive',
   GET_ARTICAL: '/artical',
   GET_COMMENT: '/comment',
+  GET_RECOMMEND: '/recommend',
   POST_COMMENT: '/comment'
 }
 

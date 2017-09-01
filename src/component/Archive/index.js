@@ -4,6 +4,7 @@ import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
 import {Link} from 'react-router';
 import {Icon,message} from 'antd';
+import TimeFormat from '../../utils/timeFormat';
 import './archive.less';
 
 @observer
@@ -41,7 +42,7 @@ const Typeitem = (props) => {
     list.push(<Listitem data={item} key={index} />)
   })
   return (
-    <div>
+    <div style={{margin: '0 auto',maxWidth: 1080}}>
       <h2 style={{textAlign: 'center',marginBottom: 10}}>{props.data.type}</h2>
       {list}
     </div>
@@ -49,11 +50,21 @@ const Typeitem = (props) => {
 }
 
 const Listitem = (props) => {
+  const {id,title,time,tag} = props.data;
+  let tagList = [];
+  if(tag.length !== 0){
+    tag.map(function(item,index){
+      tagList.push(<span key={index}><Icon type="tag" />{item}</span>)
+    })
+  }
   return (
-    <Link to=''>
+    <Link to={`/artical/${id}`}>
       <div className='archive-item'>
-        {props.data.title}
-        <span className='archive-item-time'><Icon type="calendar" />{props.data.time}</span>
+        {title}
+        <span className='archive-item-time'><Icon type="calendar" />{TimeFormat(time,'type1')}</span>
+        <div className="archive-item-tag">
+          {tagList}
+        </div>
       </div>
     </Link>
   )

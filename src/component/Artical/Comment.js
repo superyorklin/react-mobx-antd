@@ -3,6 +3,7 @@ import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
 import {Form,Input,Button,message} from 'antd';
+import TimeFormat from '../../utils/timeFormat';
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 
@@ -25,9 +26,11 @@ export default class Comment extends React.Component{
       message.error('获取评论失败');
     })
   }
+
   componentWillMount(){
     this._getData();
   }
+  
   render(){
     let list = [];
     if(this.comment.length === 0){
@@ -36,18 +39,18 @@ export default class Comment extends React.Component{
       this.comment.map((item,index) => {
         list.push(
           <div className='comment-list' key={index}>
-            <p style={{fontSize: 14}}><span>{ 1 + index}楼&nbsp;&nbsp;</span>{item.time}</p>
-            <p style={{fontSize: 14,color: '#0C0'}}>{item.name}&nbsp;:</p>
+            <p style={{fontSize: 14}}><span>{ 1 + index}楼&nbsp;&nbsp;</span>{TimeFormat(item.time,'type2')}</p>
+            <p style={{fontSize: 14,color: '#0C0'}}>{item.author}&nbsp;:</p>
             <p style={{fontSize: 14,marginTop: 5,fontFamily: 'Georgia, serif',wordWrap: 'break-word',background: 'white',padding: '5px'}}>{item.content}</p>
           </div>)
       })
     }
     return (
-      <div className='comment-area'>
+      <div className='comment-area' id='comment'>
         <p style={{fontSize: 30,borderTop: '3px solid #CCCCCC'}}>评论区</p>
         {list}
         <p style={{fontSize: 30,marginTop: 10}}>发表评论</p>
-        <WrappedCommitForm reload={this._getData} />
+        <WrappedCommitForm reload={this._getData} articalId={this.props.articalId}/>
       </div>
     )
   }
@@ -59,8 +62,9 @@ class CommitForm extends React.Component{
     e.preventDefault();
     this.props.form.validateFields((err,value) => {
       if(!err){
+        value.articalId = this.props.articalId; 
         Interface.postComment(value).then(res => {
-          if(res.status === 'ok'){
+          if(res.Success){
             this.props.reload();
           }
         }).catch(() => {
@@ -88,7 +92,7 @@ class CommitForm extends React.Component{
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label='姓名'>
-          {getFieldDecorator('name',{
+          {getFieldDecorator('author',{
             rules: [
               {
                 required: true,

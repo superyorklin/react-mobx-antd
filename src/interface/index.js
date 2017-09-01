@@ -12,6 +12,9 @@ class Interface{
   getComment(data){
     return fetch.get(API.GET_COMMENT,data);
   }
+  getRecommend(data){
+    return fetch.get(API.GET_RECOMMEND,data);
+  }
   postComment(data){
     return fetch.post(API.POST_COMMENT,data);
   }

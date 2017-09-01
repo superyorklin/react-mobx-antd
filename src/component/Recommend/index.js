@@ -1,11 +1,8 @@
 import React from 'react';
 import {Pagination,Icon,Spin,message} from 'antd';
-import './home.less';
 import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
-import {Link} from 'react-router';
-import TimeFormat from '../../utils/timeFormat';
 
 @observer
 export default class Home extends React.Component {
@@ -28,7 +25,7 @@ export default class Home extends React.Component {
   }
   _getData = (page) => {
     this.changeLoading();
-    Interface.getAllArtical({page: page}).then(res => {
+    Interface.getRecommend({page: page}).then(res => {
       this.changeLoading();
       this.changeArtical(res.data);
       this.changeTotal(res.total);   
@@ -57,7 +54,7 @@ export default class Home extends React.Component {
           </ul>
         </div>
         <footer className='pagination'>
-          <Pagination showTotal={total => `总共${total}篇文章`} total={this.total} onChange={this.pageChange}/>
+          <Pagination showTotal={total => `总共${total}篇推荐文章`} total={this.total} onChange={this.pageChange}/>
         </footer>
       </div>
     )
@@ -65,7 +62,7 @@ export default class Home extends React.Component {
 }
 
 const Item = observer((props) => {
-  const {articalId,title,time,desc,tag,visit} = props.item;
+  const {title,desc,tag,author,url} = props.item;
   let tagList = [];
   if(tag){
     tag.map(function(item,index){
@@ -75,13 +72,14 @@ const Item = observer((props) => {
   return(
     <li className='artical-item'>
       <header>
-        <span className='artical-item-title'><Link to={`/artical/${articalId}`}>{title}</Link></span>
-        <span className='artical-item-time'><Icon type="calendar" />{TimeFormat(time,'type1')}</span>
+        <span className='artical-item-title'><a href={url}>{title}</a></span>
+        <span className='artical-item-author' style={{float: 'right',fontSize: 16}}><i>{`作者：${author}`}</i></span>
       </header>
       <desc dangerouslySetInnerHTML={{__html: desc}}></desc>
       <footer className="clearfix">
-        <span className='artical-item-visit'><Icon type="eye" />{visit}</span>
-        {tagList}
+        <div style={{float: 'right'}}>
+          {tagList}
+        </div>
       </footer>
     </li>
   )

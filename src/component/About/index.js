@@ -4,7 +4,7 @@ import './about.less';
 export default class About extends React.Component{
   render(){
     return (
-      <div className='about-me'>
+      <div className='about-me' style={{margin: '0 auto',maxWidth: 1080}}>
         <h1>About Me</h1>
         <p>我是York Lin，现居于杭州</p>
         <p>日常所见所闻，所感记录于此</p>
