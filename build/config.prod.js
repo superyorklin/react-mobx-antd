@@ -36,7 +36,7 @@ module.exports = webpackMerge(config, {
                 'NODE_ENV': JSON.stringify('production')
             }
         }),
-        new ExtractTextPlugin("css/[name].css"),
+        new ExtractTextPlugin("index/css/[name].css"),
         new webpack.optimize.UglifyJsPlugin({
             drop_console: true,
             drop_debugger: true

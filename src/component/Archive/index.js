@@ -15,12 +15,23 @@ export default class Archive extends React.Component{
     this.data = newData;
   }
 
-  componentWillMount(){
-    Interface.getArchive().then(res => {
+  componentDidMount(){
+    /* Interface.getArchive().then(res => {
       this.changeData(res);
     }).catch(err => {
       message.error(`${err.statusCode}错误`);
-    })
+    }) */
+    this.getData();
+  }
+
+  getData = async () => {
+    try {
+      const data = await Interface.getArchive();
+      this.changeData(data);
+    } catch (err) {
+      message.error(`${err.statusCode}错误`);
+    }
+    
   }
 
   render(){

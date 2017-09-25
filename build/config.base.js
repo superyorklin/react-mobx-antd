@@ -59,7 +59,7 @@ module.exports = {
     new webpack.LoaderOptionsPlugin(eslintAndPostcss),
   ],
   output: {
-    filename: 'js/[name].bundle.js',
+    filename: 'index/js/[name].bundle.js',
     // filename: '[name].bundle.[chunkhash:5].js',
     path: CONST.DIST
   },
@@ -79,7 +79,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: '8192',
-          name: 'img/[name].[ext]'
+          name: 'index/img/[name].[ext]'
         }
       }
     }, {
@@ -88,7 +88,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: '8192',
-          name: 'font/[name].[ext]'
+          name: 'index/font/[name].[ext]'
         }
       }
     }, {
