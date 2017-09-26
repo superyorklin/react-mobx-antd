@@ -62,9 +62,12 @@ class CommitForm extends React.Component{
     e.preventDefault();
     this.props.form.validateFields((err,value) => {
       if(!err){
+        value.author = encodeURIComponent(value.author);
+        value.content = encodeURIComponent(value.content);
         value.articalId = this.props.articalId; 
         Interface.postComment(value).then(res => {
           if(res.Success){
+            message.success('评论成功');
             this.props.reload();
           }
         }).catch(() => {

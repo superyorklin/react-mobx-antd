@@ -54,7 +54,7 @@ function send(url, method, data) {
       query += (value + '=' + data[value] + '&');
     });
     query = query.substring(0, query.length - 1);
-    url = url + '?' + query;
+    url = url + '?' + query + '&t=' + new Date().getTime();
   }
 
   return new Promise((resolve, reject) => {
