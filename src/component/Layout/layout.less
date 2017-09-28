@@ -2,18 +2,18 @@
   height: 100%;
   min-width: 600px;
   .side-menu{
-    width: 300px;
+    width: 250px;
     background: rgb(64,64,64);
     position: fixed;
     bottom: 0;
     left: 0;
     top: 0;
     .img{
-      width: 150px;
-      height: 150px;
+      width: 126px;
+      height: 126px;
       background: url('../../assets/images/icon.jpg') 100% 100% no-repeat;
       background-size: cover;
-      border-radius: 75px;
+      border-radius: 63px;
       margin: 0 auto;
       margin-top: 50px;
       margin-bottom: 50px;
@@ -46,19 +46,23 @@
 
 @media screen and (max-width: 560px) {
   .container{
+    width: 100vw;
+    min-width: 320px;
     .side-menu{
       z-index: 999;
       width: 100vw;
       height: 50px;
       li{
-        width: 25%;
-        float: left;
-        height: 50px;
-        &.active{
-          background: #1C86EE;
-          color: #FFFFFF;
-          border-left: 7px solid#1C86EE;
-        }
+        a{
+          width: 25%;
+          float: left;
+          height: 50px;          
+          &.active{
+            background: #1C86EE;
+            color: #FFFFFF;
+            border-left: 7px solid#1C86EE;
+          }
+        }        
         span{
           display: none;
         }
