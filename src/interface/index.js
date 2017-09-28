@@ -10,7 +10,7 @@ class Interface{
     return fetch.get(API.GET_ARCHIVE);
   }
   getComment(data){
-    return fetch.get(API.GET_COMMENT,data);
+    return fetch.get(API.GET_COMMENT,data,true);
   }
   getRecommend(data){
     return fetch.get(API.GET_RECOMMEND,data);

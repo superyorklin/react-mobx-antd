@@ -37,7 +37,7 @@ const defaultHeaders = {
 /**
  * 封装异步请求
  */
-function send(url, method, data) {
+function send(url, method, data , timestamp) {
   CallbacksSetting.onRequestStart()
 
   method = (method || 'get').toUpperCase()
@@ -54,7 +54,11 @@ function send(url, method, data) {
       query += (value + '=' + data[value] + '&');
     });
     query = query.substring(0, query.length - 1);
-    url = url + '?' + query + '&t=' + new Date().getTime();
+    url = url + '?' + query;
+  }
+
+  if(timestamp){
+    url += '&t=' + new Date().getTime();
   }
 
   return new Promise((resolve, reject) => {
@@ -73,12 +77,12 @@ function send(url, method, data) {
 }
 
 export default {
-  get(url, data) {
-    return send(url, 'get', data)
+  get(url, data , timestamp) {
+    return send(url, 'get', data , timestamp)
   },
   
-  post(url, data) {
-    return send(url, 'post', data)
+  post(url, data , timestamp) {
+    return send(url, 'post', data , timestamp)
   },
   
   del(url) {
