@@ -4,7 +4,8 @@ const API = {
   GET_ARTICAL: '/artical',
   GET_COMMENT: '/comment',
   GET_RECOMMEND: '/recommend',
-  POST_COMMENT: '/comment'
+  POST_COMMENT: '/comment',
+  GET_CAPTCHA: '/captcha'
 }
 
 export default API;

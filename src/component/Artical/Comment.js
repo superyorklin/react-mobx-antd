@@ -2,8 +2,9 @@ import React from 'react';
 import Interface from '../../interface/index';
 import {observer} from 'mobx-react';
 import {observable,action} from 'mobx';
-import {Form,Input,Button,message} from 'antd';
+import {Form,Input,Button,message,Icon} from 'antd';
 import TimeFormat from '../../utils/timeFormat';
+import API from '../../interface/api';
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 
@@ -55,23 +56,33 @@ export default class Comment extends React.Component{
     )
   }
 }
-
+@observer
 class CommitForm extends React.Component{
   
+  @observable captchaUrl = API.GET_CAPTCHA;
+  @action changeCaptcha = () => {
+    this.captchaUrl = API.GET_CAPTCHA + '?_=' + new Date().getTime();
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err,value) => {
       if(!err){
         value.author = encodeURIComponent(value.author);
         value.content = encodeURIComponent(value.content);
+        value.code = encodeURIComponent(value.code);
         value.articalId = this.props.articalId; 
         Interface.postComment(value).then(res => {
           if(res.Success){
             message.success('评论成功');
+            this.props.form.resetFields();
             this.props.reload();
           }
-        }).catch(() => {
-          message.error('提交评论失败');
+        }).catch((err) => {
+          err.errMsg && message.error(err.errMsg);
+          !err.errMsg && message.error('提交评论失败');
+          this.props.form.resetFields(['code'])
+          this.changeCaptcha(); 
         })
       }
     })
@@ -93,7 +104,7 @@ class CommitForm extends React.Component{
       }
     };
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} style={{maxWidth: 500,margin: 'auto'}}>
         <FormItem {...formItemLayout} label='姓名'>
           {getFieldDecorator('author',{
             rules: [
@@ -117,6 +128,20 @@ class CommitForm extends React.Component{
           })(
             <TextArea placeholder='请开始你的表演' autosize={{ minRows: 2, maxRows: 6 }} />
           )}
+        </FormItem>
+        <FormItem {...formItemLayout} label='验证码'>
+          {getFieldDecorator('code',{
+            rules: [
+              {
+                required: true,
+                message: '请输入验证码'
+              }
+            ]
+          })(
+            <Input className='captcha' placeholder='请输入验证码' autoComplete='off' /> 
+          )}
+          <Icon className='captcha-refresh' onClick={this.changeCaptcha} type="sync" />
+          <img className='captcha-pic' onClick={this.changeCaptcha} src={this.captchaUrl} />
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <Button type='primary' htmlType='submit' size='large'>提交评论</Button>

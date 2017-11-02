@@ -11,4 +11,41 @@
       margin-bottom: 20px;
     }
   }
+  .captcha{
+    width: 45%;
+  }
+  .captcha-refresh{
+    float: right;
+    line-height: 30px;
+    margin: 0 15px;
+    &:before{
+      font-size: 16px;
+    }
+  }
+  .captcha-pic{
+    float: right
+  }
+}
+@media screen and (max-width: 490px) and (min-width: 371px) {
+  .artical-content{
+    .captcha-pic{
+      float: right;
+      margin-right: 10px;
+    }
+    .captcha-refresh{
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  
+  .artical-content{
+    .captcha{
+      width: 40%;
+    }
+    .captcha-refresh{
+      display: none;
+    }
+  }
 }
