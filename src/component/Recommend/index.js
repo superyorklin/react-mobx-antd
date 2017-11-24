@@ -54,7 +54,7 @@ export default class Home extends React.Component {
           </ul>
         </div>
         <footer className='pagination'>
-          <Pagination showTotal={total => `总共${total}篇推荐文章`} total={this.total} onChange={this.pageChange}/>
+          <Pagination showTotal={total => `总共${total}篇推荐文章`} pageSize={5} total={this.total} onChange={this.pageChange}/>
         </footer>
       </div>
     )
