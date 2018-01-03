@@ -28,19 +28,14 @@ module.exports = {
       'react',
       'react-dom',
       'jquery',
-      'lodash',
-      'moment',
-      'immutable'
+      'lodash'
     ],
     main: CONST.ENTRY
   },
   plugins: [
     new webpack.ProvidePlugin({
         $: 'jquery',
-        _: 'lodash',
-        moment: 'moment',
-        // cls: 'classnames',
-        Immutable: 'immutable'
+        _: 'lodash'
     }),
     new HtmlWebpackPlugin({
       title: 'JUST DEMO',
